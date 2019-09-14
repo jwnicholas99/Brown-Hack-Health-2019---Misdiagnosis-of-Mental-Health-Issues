@@ -44,6 +44,12 @@ def indexPatient():
     diaryPosts = Diary.query.filter_by(patient_id = current_user.id)
     return render_template('indexPatient.html', title="Home", diaryPosts=diaryPosts)
 
+@app.route('/')
+@app.route('/indexPsychiatrist')
+@login_required(role="Psychiatrist")
+def indexPsychiatrist():
+    return render_template("indexPsychiatrist.html", title="Home | " + current_user.username, psychiatrist=current_user)
+
 @app.route('/registration', methods=["GET","POST"])
 def registration():
     if current_user.is_authenticated:
@@ -55,6 +61,14 @@ def registration():
         if form.validate_on_submit():
             user = User(username=form.username.data)
             user.set_password(form.password.data)
+
+@app.route('/indexPsychiatrist/view')
+def psychiatristView():
+    pass
+
+@app.route('/IndexPsychiatrist/manage', methods=["GET", "POST"])
+def psychiatristManage():
+    pass
 
 
 
