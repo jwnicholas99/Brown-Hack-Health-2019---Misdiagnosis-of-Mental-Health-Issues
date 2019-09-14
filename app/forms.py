@@ -3,14 +3,14 @@ from wtforms import DateField, StringField, PasswordField, SubmitField, BooleanF
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 
 class LoginForm(FlaskForm):
-    username = StringField('Username', Validators=[DataRequired()])
-    password = PasswordField('Password', Validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
     is_psychiatrist = BooleanField('Are you a psychiatrist?')
     submit = SubmitField('Sign In')
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', Validators=[DataRequired()])
-    email = StringField('Email', Validators=[DataRequired(), Email()])
+    username = StringField('Username', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
     is_psychiatrist = BooleanField('Are you a psychiatrist?')
@@ -33,6 +33,6 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('This email has been taken already.')
 
 class DiaryForm(FlaskForm):
-    Date = DateField('Date Today:', Validators=[DataRequired()])
-    Mood = IntegerField('Mood Today', Validators=[DataRequired()])
-    Post = TextAreaField('How was your day?', Validators=[DataRequired()])
+    Date = DateField('Date Today:', validators=[DataRequired()])
+    Mood = IntegerField('Mood Today', validators=[DataRequired()])
+    Post = TextAreaField('How was your day?', validators=[DataRequired()])
