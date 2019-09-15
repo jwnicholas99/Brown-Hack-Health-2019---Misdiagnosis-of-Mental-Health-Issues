@@ -20,7 +20,7 @@
             {% for patient in psychiatrist.patients_id %}
             <li>Patient Username:
                 <p>{{patient.username}}</p>
-                <a href="{{url_for('psychiatristDelete', username=patient.username, patient=patient)}}">Delete</a>
+                <a href="{{url_for('psychiatristDelete', username=patient.username)}}">Delete</a>
             </li>
             {% endfor %}
             {% endif %}
