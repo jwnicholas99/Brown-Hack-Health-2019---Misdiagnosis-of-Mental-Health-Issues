@@ -1,27 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>Home | {{psychiatrist.username}}</div>
-<hr class="header-line">
-    <div><a href="{{url_for('psychiatristManage')}}">Add/Remove Patients</a></div>
-
-    <div>
-        <ul class="patient-list-header">
-            {% if psychiatrist.patients_id|length == 0 %}
-            <div>No patients registered.</div>
-            {% else %}
-            {% for patient in psychiatrist.patients_id %}
-            <li class="patient-wrap">
-                <div class="patient-header">Log for {{patient.username}}:</div>
-                {% for post in patient.diary %}
-                    <p>Date: {{post.date}}</p>
-                    <p>Mood: {{post.mood}}</p>
-                    <p>Note: {{post.post}}</p>
-                {% endfor %}
-            </li>
+<div class="index-wrap1">
+<div class="art-title"> Home | {{psychiatrist.username}}</div>
+    <hr>
+    <div class="index-wrap2">
+        {% if psychiatrist.patients_id|length == 0 %}
+        <div>No patients registered.</div>
+        {% else %}
+        {% for patient in psychiatrist.patients_id %}
+            <div class="patient-header">Log for {{patient.username}}:</div>
+            {% for post in patient.diary %}
+            <div class="post">
+                <div class="post-head">Date: {{post.date}}</div>
+                <div>Mood: {{post.mood}}</div>
+                <div>Note: {{post.post}}</div>
+            </div>
             {% endfor %}
-            {% endif %}
-        </ul>
+        {% endfor %}
+        {% endif %}
+        <div><a href="{{url_for('psychiatristManage')}}">Add/Remove Patients</a></div>
     </div>
+</div>
 
 {% endblock %}

@@ -1,29 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>Manage Patients | {{psychiatrist.username}}</div>
-<hr class="header-line">
-    <div>
+<div class="index-wrap1">
+<div class="art-title">Manage Patients | {{psychiatrist.username}}</div>
+<hr>
+    <div class="index-wrap2 psych-manage">
         <form action="" method="post" novalidate>
             {{form.hidden_tag()}}
-            <p>{{form.username.label}} {{ form.username(size=32) }}</p>
+            <div>Add a patient:</div>
+            <p>{{form.username.label(class_="form-item")}} <br>
+                {{ form.username(size=32, class_="form-box") }}</p>
             {% for error in form.username.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-            <p>{{form.submit()}}</p>
+            <p>{{form.submit(class_="form-button")}}</p>
         </form>
-
-        <ul>
-            {% if psychiatrist.patients_id|length == 0 %}
-            <div>No patients registered.</div>
-            {% else %}
-            {% for patient in psychiatrist.patients_id %}
-            <li>Patient Username:
-                <p>{{patient.username}}</p>
-                <a href="{{url_for('psychiatristDelete', username=patient.username)}}">Delete</a>
-            </li>
-            {% endfor %}
-            {% endif %}
-        </ul>
+        {% if psychiatrist.patients_id|length == 0 %}
+        <div>No patients registered.</div>
+        {% else %}
+        <div>Current Patients:</div>
+        {% for patient in psychiatrist.patients_id %}
+        <div> || {{patient.username}}
+            <a href="{{url_for('psychiatristDelete', username=patient.username)}}" class="delete">Remove Patient</a>
+        </div>
+            
+        {% endfor %}
+        {% endif %}
     </div>
+</div>
 {% endblock %}

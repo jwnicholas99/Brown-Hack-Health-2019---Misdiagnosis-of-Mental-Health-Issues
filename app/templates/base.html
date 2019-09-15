@@ -1,18 +1,28 @@
 <html>
   <head>
-    {% if title %}
-    <title>{{ title }}</title>
-    {% else %}
-    <title>Welcome to DiagnosisClarity</title>
-    {% endif %}
-    {% if current_user.is_anonymous %}
-    <div><a href="{{url_for('registration')}}">Register</a></div>
-    {% else %}
-    <div><a href="{{url_for('logout')}}">Logout</a></div>
-    {% endif %}
-
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway:500&display=swap" rel="stylesheet">
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+      {% if title %}
+      <title>{{ title }}</title>
+      {% else %}
+      <title>Welcome to DiagnosisClarity</title>
+      {% endif %}
   </head>
   <body>
+      <header>
+        <a href="{{url_for('login')}}"" style="text-decoration: none">
+        <div class="title-wrapper">
+          <img src="{{ url_for('static', filename='icon.PNG') }}">
+          <div class="title">DiagnosisClarity</div> 
+        </div>
+        </a>
+        {% if current_user.is_anonymous %}
+        <div class="logout"><a href="{{url_for('registration')}}">Register</a></div>
+        {% else %}
+        <div class="logout"><a href="{{url_for('logout')}}">Logout</a></div>
+        {% endif %}
+      </header>
+      <div class="border-line"></div>
     {% block content %}{% endblock %}
   </body>
 <html>

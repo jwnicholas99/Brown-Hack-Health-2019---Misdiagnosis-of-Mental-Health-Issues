@@ -1,8 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <div class="index-wrap1">
+  <div class="art-title">Home | {{current_user.username}}</div>
+  <hr>
+  <div class="index-wrap2">
   {% for diaryPost in diaryPosts %}
+    <div class="post">
     {% include '_diaryPost.html' %}
+    </div>
   {% endfor %}
-  <a href="{{url_for('addPost')}}">Add Post</a>
+  <a href="{{url_for('addPost')}}">Add a post</a>
+  </div>
+  </div>
 {% endblock %}

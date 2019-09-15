@@ -1,0 +1,229 @@
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("https://images.unsplash.com/photo-1483794344563-d27a8d18014e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=6000&q=80");
+    background-size: cover;
+}
+
+header .logout {
+    order: 1;
+    margin: 4px 10px 4px 4px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16pt;
+    border: 2px solid darkblue;
+    transition: 0.2s ease-in-out;
+    height: 35px;
+    width: 120px;
+    color: darkblue;
+    background-color: white;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .logout a {
+    order: 1;
+    color: inherit;
+    font-family: 'Open Sans';
+    text-decoration: none;
+}
+
+header .logout:hover {
+    background-color: darkblue;
+    color: white;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 6px 20px 6px 20px;
+    margin: 0px 0px 0px 0px;
+    height: 110px;
+    width: 100%;
+    background-color: white;
+}
+
+header .title-wrapper {
+    display: flex;
+    justify-content: left;
+    align-items: flex-end;
+    text-decoration: none;
+}
+
+header .title-wrapper .title {
+    order: 1;
+    font-family: 'Raleway';
+    margin: 5px;
+    font-size: 40pt;
+    color: black;
+    text-decoration: none;
+}
+
+header .title-wrapper img {
+    order: 1;
+    height: 75px;
+    margin: 10px;
+}
+
+.border-line {
+    position: relative;
+    height: 5px;
+    width: 100%;
+    background-color: black;
+}
+
+body {
+    margin: 0px 0px 0px 0px;
+}
+
+.login-wrap1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60%
+}
+
+.login-wrap2 {
+    order: 0;
+}
+
+.login-wrap2 h1 {
+    font-family: 'Raleway';
+    font-size: 25pt;
+}
+
+.login-wrap2  {
+    font-family: 'Open Sans';   
+}
+
+.form-item {
+    text-decoration: underline;
+}
+
+.form-box {
+    border: 1px solid grey;
+    height: 22px;
+}
+
+.form-button {
+    background: none;
+	color: darkblue;
+    padding: 2px; 
+    border: 2px solid darkblue;
+    font: inherit;
+    cursor: pointer;
+    width: 100px;
+}
+
+.form-big-box {
+    border: 1px solid grey;
+}
+
+.form-button:hover {
+    transition: 0.15s ease-in-out;
+    background-color: darkblue;
+    color: white; 
+}
+
+.reg {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: 300px;
+}
+.reg p {
+    margin-right: 10px;
+    order: 0;
+}
+
+.reg a {
+    order: 1;
+}
+
+.index-wrap1 {
+    margin: 20px 160px;
+}
+
+.index-wrap1 .art-title {
+    font-family: 'Open Sans';
+    font-size: 30pt;
+}
+
+.index-wrap2 a {
+
+    font-family: "Open Sans";
+    font-size: 16pt;
+    text-decoration: none;
+    color: darkblue;
+    border-bottom: 2px solid transparent;
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+}
+
+.index-wrap2 a.delete {
+    font-size: 9pt;
+    color: maroon;
+    float: right;
+    border-bottom: 1px solid transparent;
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+}
+
+.index-wrap2.index-wrap2.psych-manage a.delete {
+    margin-left: 50px;
+    margin-top: 2.5px;
+}
+
+.index-wrap2 a:hover {
+    border-bottom: 2px solid darkblue;
+}
+
+.index-wrap2 a.delete:hover {
+    border-bottom: 1px solid maroon;
+}
+
+.index-wrap2 .post {
+    width: 80%;
+    margin: 8px;
+    padding: 4px;
+    padding-left: 10pt;
+    font-family: "Open Sans";
+    font-size: 13pt;
+    border-left: 3px solid gray;
+}
+
+.post .post-head {
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.index-wrap2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.index-wrap2 .patient-header {
+    width: 90%;
+    font-family: "Raleway";
+    font-size: 15pt;
+    padding: 10px;
+    border-left: 5px solid darkblue;
+}
+
+.index-wrap2.psych-manage {
+    font-family: "Open Sans";
+    width: 80%;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

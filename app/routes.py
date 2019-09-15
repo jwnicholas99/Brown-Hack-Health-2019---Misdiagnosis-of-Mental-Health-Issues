@@ -83,7 +83,6 @@ def psychiatristManage():
             flash("Username Not Found")
             return redirect(url_for('psychiatristManage'))
         current_user.patients_id.append(user)
-        db.session.add(user)
         db.session.commit()
         print('b', current_user.patients_id)
         flash("Successfully added " + user.username + "!")

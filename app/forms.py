@@ -7,7 +7,7 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     is_psychiatrist = BooleanField('Are you a psychiatrist?')
-    submit = SubmitField('Sign In')
+    submit = SubmitField('Login')
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -28,11 +28,11 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('This email has been taken already.')
 
 class DiaryForm(FlaskForm):
-    date = StringField('Date Today:', validators=[DataRequired()])
-    mood = IntegerField('Mood Today', validators=[DataRequired()])
+    date = StringField('Date today', validators=[DataRequired()])
+    mood = IntegerField('Mood today (1-10)', validators=[DataRequired()])
     post = TextAreaField('How was your day?', validators=[DataRequired()])
     submit = SubmitField('Add Post')
 
 class AddPatientForm(FlaskForm):
     username = StringField('Username for Patient:', validators=[DataRequired()])
-    submit = SubmitField('Add User')
+    submit = SubmitField('Add Patient')

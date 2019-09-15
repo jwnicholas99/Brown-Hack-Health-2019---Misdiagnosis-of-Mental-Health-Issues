@@ -1,8 +1,9 @@
+<div class="post-head">
 Date: {{diaryPost.date}}
-<br>
+</div>
 Mood: {{diaryPost.mood}}
 <br>
 Post: {{diaryPost.post}}
 <br>
-<a href = "{{url_for('deletePost', post_id = diaryPost.id)}}"> Delete Post </a>
+<a href="{{url_for('deletePost', post_id = diaryPost.id)}}" class="delete"> Delete Post </a>
 <br>
