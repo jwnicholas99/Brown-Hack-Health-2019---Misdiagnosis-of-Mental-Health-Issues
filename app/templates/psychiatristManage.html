@@ -1,5 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div>Manage Patients | {{psychiatrist.username}}</div>
+<hr class="header-line">
+    <div>
+        <form action="" method="post" novalidate>
+            {{form.hidden_tag()}}
+            <p>{{form.username.label}}</p>
+            {% for error in form.username.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+            <p>((form.submit()</p>
+        </form>
 
+        <ul>
+            {% for patient in psychiatrist.patients %}
+            <li>Patient Username:
+                <a href="{{url_for('psychiatristDelete', patient.username, patient, psychiatrist)}}">Delete</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

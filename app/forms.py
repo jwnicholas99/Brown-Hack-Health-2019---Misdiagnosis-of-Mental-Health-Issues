@@ -36,3 +36,7 @@ class DiaryForm(FlaskForm):
     Date = DateField('Date Today:', Validators=[DataRequired()])
     Mood = IntegerField('Mood Today', Validators=[DataRequired()])
     Post = TextAreaField('How was your day?', Validators=[DataRequired()])
+
+class AddPatientForm(FlaskForm):
+    username = StringField('Username for Patient', Validators=[DataRequired()])
+    submit = SubmitField('Add User')

@@ -1,7 +1,7 @@
 from app import app, db
 from flask import render_template, url_for, redirect, flash, request
 from flask_login import login_required, current_user, login_user, logout_user
-from app.forms import LoginForm, RegistrationForm, DiaryForm
+from app.forms import LoginForm, RegistrationForm, DiaryForm, AddPatientForm
 from app.models import User, Diary
 from functools import wraps
 
@@ -62,13 +62,33 @@ def registration():
             user = User(username=form.username.data)
             user.set_password(form.password.data)
 
-@app.route('/indexPsychiatrist/view')
-def psychiatristView():
-    pass
-
-@app.route('/IndexPsychiatrist/manage', methods=["GET", "POST"])
+@app.route('/IndexPsychiatrist/manage',  methods=["GET", "POST"])
+@login_required(role="Psychiatrist")
 def psychiatristManage():
-    pass
+    form = AddPatientForm()
+    if form.validate_on_submit:
+        user = User.query.filter_by(user=form.username.data, is_psychiatrist=False)
+        if user is None:
+            flash("The username is not found")
+            return redirect(url_for('psychiatristManage'))
+        current_user.patients.append(user)
+        flash("Successfully added " + user.username + "!")
+        return redirect(url_for('psychiatristManage'))
+    return render_template("psychiatristManage", title='Manage Patients', psychiatrist=current_user) 
+
+@app.route('/IndexPsychiatrist/manage/<username>')
+@login_required(role="Psychiatrist")
+def psychiatristDelete(username, patient, psychiatrist):
+    psychiatrist.delete(patient)
+    return redirect(url_for('psychiatristManage'))
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+
+
 
 
 
