@@ -7,7 +7,10 @@
 
     <div>
         <ul class="patient-list-header">
-            {% for patient in psychiatrist.patients.all() %}
+            {% if psychiatrist.patients_id is none %}
+            <div>No patients registered.</div>
+            {% else %}
+            {% for patient in psychiatrist.patients_id.all() %}
             <li class="patient-wrap">
                 <div class="patient-header">Log for {{patient.username}}:</div>
                 {% for post in patient.diary %}
@@ -17,6 +20,7 @@
                 {% endfor %}
             </li>
             {% endfor %}
+            {% endif %}
         </ul>
     </div>
 

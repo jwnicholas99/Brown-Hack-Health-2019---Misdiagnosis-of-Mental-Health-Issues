@@ -34,5 +34,5 @@ class DiaryForm(FlaskForm):
     submit = SubmitField('Add Post')
 
 class AddPatientForm(FlaskForm):
-    username = StringField('Username for Patient', Validators=[DataRequired()])
+    username = StringField('Username for Patient:', validators=[DataRequired()])
     submit = SubmitField('Add User')
