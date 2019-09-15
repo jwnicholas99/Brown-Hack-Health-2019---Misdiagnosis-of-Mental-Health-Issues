@@ -13,7 +13,7 @@ def login_required(role="ANY"):
                return redirect(url_for('login'))
             urole = current_user.get_urole()
             if ( (urole != role) and (role != "ANY")):
-                return login.unauthorized()      
+                return login.unauthorized()
             return fn(*args, **kwargs)
         return decorated_view
     return wrapper
@@ -62,18 +62,11 @@ def registration():
         return redirect(url_for('login'))
     return render_template('registration.html', title='Register', form=form)       
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@app.route('/addPost')
+@login_required(role="Patient")
+def addPost():
+    form = DiaryForm()
+    if form.validate_on_submit():
+        new_post = Diary(date=form.date.data, mood=form.mood.data, post=form.post.data)
+        current_user.diary.append(new_post)
+        return redirect(url_for('indexPatient'))

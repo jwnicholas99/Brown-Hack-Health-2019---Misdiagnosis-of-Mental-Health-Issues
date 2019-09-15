@@ -28,7 +28,7 @@ class User(UserMixin, db.Model):
         else:
             return 'Patient'
 
-    
+
 """
 class Psychiatrist(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -60,4 +60,3 @@ class Diary(db.Model):
 
     def __repr__(self):
         return '<Diary {}>'.format(self.mood)
-
