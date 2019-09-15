@@ -31,9 +31,14 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash("The username or password is not correct")
-            return redirect(url_for('indexPatient'))
+            return redirect(url_for('login'))
         login_user(user)
         next_url = request.args.get('next')
+        if not next_url or url_parse(next_url).netloc != '':
+            if current_user.is_psychiatrist:
+                return redirect(url_for('indexPsychiatrist'))
+            else:
+                return redirect(url_for('indexPatient'))
         return redirect(next_url)
     return render_template('login.html', title='Sign-In', form=form)
 
