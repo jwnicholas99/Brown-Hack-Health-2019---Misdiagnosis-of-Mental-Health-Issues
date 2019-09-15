@@ -33,6 +33,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError('This email has been taken already.')
 
 class DiaryForm(FlaskForm):
-    Date = DateField('Date Today:', validators=[DataRequired()])
-    Mood = IntegerField('Mood Today', validators=[DataRequired()])
-    Post = TextAreaField('How was your day?', validators=[DataRequired()])
+    date = DateField('Date Today:', validators=[DataRequired()])
+    mood = IntegerField('Mood Today', validators=[DataRequired()])
+    post = TextAreaField('How was your day?', validators=[DataRequired()])
+    submit = SubmitField('Add Post')

@@ -1,6 +1,6 @@
 from app import app, db
 from flask import render_template, url_for, redirect, flash, request
-from flask_login import current_user, login_user, logout_user
+from flask_login import login_required, current_user, login_user, logout_user
 from app.forms import LoginForm, RegistrationForm, DiaryForm
 from app.models import User, Diary
 from functools import wraps
@@ -13,7 +13,7 @@ def login_required(role="ANY"):
                return redirect(url_for('login'))
             urole = login.reload_user().get_urole()
             if ( (urole != role) and (role != "ANY")):
-                return login.unauthorized()      
+                return login.unauthorized()
             return fn(*args, **kwargs)
         return decorated_view
     return wrapper
@@ -53,27 +53,14 @@ def registration():
             return redirect(url_for('indexPatient'))
         form = RegistrationForm()
         if form.validate_on_submit():
-            user = User(username=form.username.data, email=form.email.data)
-            user.is_psychiatrist = form.is_psychiatrist.data
+            user = User(username=form.username.data)
             user.set_password(form.password.data)
-            db.session.add(user)
-            db.session.commit()
-            flash('Your accoutn has been registered!')
-            return redirect(url_for('login'))
-    return render_template('registration.html', title='Register', form=form)       
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@app.route('/addPost')
+@login_required(role="Patient")
+def addPost():
+    form = DiaryForm()
+    if form.validate_on_submit():
+        new_post = Diary(date=form.date.data, mood=form.mood.data, post=form.post.data)
+        current_user.diary.append(new_post)
+        return redirect(url_for('indexPatient'))

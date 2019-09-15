@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1> Add Diary Post </h1>
+  <form action = "" method = "post" novalidate>
+    {{ form.hidden_tag }}
+    <p>
+      {{ form.date.label }}
+      {{ form.date() }}
+      {% for error in form.date.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.mood.label }}
+      {{ form.mood() }}
+      {% for error in form.mood.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </p>
+    <p>
+      {{ form.post.label }}
+      {{ form.post() }}
+      {% for error in form.post.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+      {% endfor %}
+    </p>
+    <p> {{ form.submit() }} </p>
+  </form>
+{% endblock %}
