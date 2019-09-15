@@ -73,19 +73,23 @@ def registration():
 def psychiatristManage():
     form = AddPatientForm()
     if form.validate_on_submit:
-        user = User.query.filter_by(user=form.username.data, is_psychiatrist=False)
+        user = User.query.filter_by(username=form.username.data, is_psychiatrist=False)
         if user is None:
-            flash("The username is not found")
+            flash("Username Not Found")
             return redirect(url_for('psychiatristManage'))
-        current_user.patients.append(user)
+        print("a: ", user)
+        print("current user: ", current_user)
+        print("adsf:", current_user.patients_id)
+        current_user.patients_id.append(user)
         flash("Successfully added " + user.username + "!")
         return redirect(url_for('psychiatristManage'))
     return render_template("psychiatristManage", title='Manage Patients', psychiatrist=current_user) 
 
 @app.route('/indexPsychiatrist/manage/<username>')
 @login_required(role="Psychiatrist")
-def psychiatristDelete(username, patient, psychiatrist):
-    psychiatrist.delete(patient)
+def psychiatristDelete(username, patient):
+    db.session.delete(patient)
+    db.session.commit()
     return redirect(url_for('psychiatristManage'))
 
 @app.route('/logout')

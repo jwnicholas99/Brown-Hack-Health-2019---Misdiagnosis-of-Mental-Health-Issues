@@ -14,11 +14,15 @@
         </form>
 
         <ul>
-            {% for patient in psychiatrist.patients %}
+            {% if psychiatrist.patients_id is none %}
+            <div>No patients registered.</div>
+            {% else %}
+            {% for patient in psychiatrist.patients_id.all() %}
             <li>Patient Username:
-                <a href="{{url_for('psychiatristDelete', patient.username, patient, psychiatrist)}}">Delete</a>
+                <a href="{{url_for('psychiatristDelete', patient.username, patient)}}">Delete</a>
             </li>
             {% endfor %}
+            {% endif %}
         </ul>
     </div>
 {% endblock %}

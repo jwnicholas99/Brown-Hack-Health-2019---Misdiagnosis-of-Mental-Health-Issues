@@ -1,14 +1,14 @@
 <html>
   <head>
-    {% if title%}
+    {% if title %}
     <title>{{ title }}</title>
     {% else %}
     <title>Welcome to DiagnosisClarity</title>
     {% endif %}
     {% if current_user.is_anonymous %}
-    <div><a href="{{url_for('registration')">Register</a></div>
+    <div><a href="{{url_for('registration')}}">Register</a></div>
     {% else %}
-    <div><a href="{{url_for('logout')">Logout</a></div>
+    <div><a href="{{url_for('logout')}}">Logout</a></div>
     {% endif %}
 
   </head>
