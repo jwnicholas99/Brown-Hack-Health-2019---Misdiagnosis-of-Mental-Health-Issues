@@ -1,8 +1,8 @@
-"""Changed psychiatrist field
+"""updating
 
-Revision ID: eb7f380f8e0d
+Revision ID: 668ba6c0c47a
 Revises: 
-Create Date: 2019-09-14 21:07:06.091387
+Create Date: 2019-09-15 00:21:54.509197
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'eb7f380f8e0d'
+revision = '668ba6c0c47a'
 down_revision = None
 branch_labels = None
 depends_on = None

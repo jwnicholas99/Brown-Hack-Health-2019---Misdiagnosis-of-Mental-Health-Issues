@@ -77,22 +77,24 @@ def registration():
 @login_required(role="Psychiatrist")
 def psychiatristManage():
     form = AddPatientForm()
-    if form.validate_on_submit:
-        user = User.query.filter_by(username=form.username.data, is_psychiatrist=False)
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data, is_psychiatrist=False).first()
         if user is None:
             flash("Username Not Found")
             return redirect(url_for('psychiatristManage'))
-        print("a: ", user)
-        print("current user: ", current_user)
-        print("adsf:", current_user.patients_id)
         current_user.patients_id.append(user)
+        db.session.add(user)
+        db.session.commit()
+        print('b', current_user.patients_id)
         flash("Successfully added " + user.username + "!")
         return redirect(url_for('psychiatristManage'))
-    return render_template("psychiatristManage", title='Manage Patients', psychiatrist=current_user) 
+    print('a', current_user.patients_id) 
+    return render_template("psychiatristManage.html", title='Manage Patients', psychiatrist=current_user, form=form) 
 
 @app.route('/indexPsychiatrist/manage/<username>')
 @login_required(role="Psychiatrist")
-def psychiatristDelete(username, patient):
+def psychiatristDelete(username):
+    patient = User.query.filter_by(username=username).first()
     db.session.delete(patient)
     db.session.commit()
     return redirect(url_for('psychiatristManage'))
@@ -106,9 +108,7 @@ def logout():
 @login_required(role="Patient")
 def addPost():
     form = DiaryForm()
-    print(form.validate_on_submit())
     if form.validate_on_submit():
-        print("sup")
         new_post = Diary(date=form.date.data, mood=form.mood.data, post=form.post.data, patient_id=current_user.id)
         current_user.diary.append(new_post)
         db.session.add(new_post)

@@ -6,20 +6,21 @@
     <div>
         <form action="" method="post" novalidate>
             {{form.hidden_tag()}}
-            <p>{{form.username.label}}</p>
+            <p>{{form.username.label}} {{ form.username(size=32) }}</p>
             {% for error in form.username.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-            <p>((form.submit()</p>
+            <p>{{form.submit()}}</p>
         </form>
 
         <ul>
-            {% if psychiatrist.patients_id is none %}
+            {% if psychiatrist.patients_id|length == 0 %}
             <div>No patients registered.</div>
             {% else %}
-            {% for patient in psychiatrist.patients_id.all() %}
+            {% for patient in psychiatrist.patients_id %}
             <li>Patient Username:
-                <a href="{{url_for('psychiatristDelete', patient.username, patient)}}">Delete</a>
+                <p>{{patient.username}}</p>
+                <a href="{{url_for('psychiatristDelete', username=patient.username, patient=patient)}}">Delete</a>
             </li>
             {% endfor %}
             {% endif %}
