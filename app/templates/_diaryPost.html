@@ -1,5 +1,8 @@
 Date: {{diaryPost.date}}
 <br>
-Moode: {{diaryPost.mood}}
+Mood: {{diaryPost.mood}}
 <br>
 Post: {{diaryPost.post}}
+<br>
+<a href = "{{url_for('deletePost', post_id = diaryPost.id)}}"> Delete Post </a>
+<br>

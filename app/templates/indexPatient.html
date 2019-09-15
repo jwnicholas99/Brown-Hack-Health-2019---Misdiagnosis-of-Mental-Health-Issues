@@ -4,4 +4,5 @@
   {% for diaryPost in diaryPosts %}
     {% include '_diaryPost.html' %}
   {% endfor %}
+  <a href="{{url_for('addPost')}}">Add Post</a>
 {% endblock %}
