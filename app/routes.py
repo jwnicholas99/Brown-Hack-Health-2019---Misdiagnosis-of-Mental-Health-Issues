@@ -1,6 +1,6 @@
 from app import app, db
 from flask import render_template, url_for, redirect, flash, request
-from flask_login import login_required, current_user, login_user, logout_user
+from flask_login import current_user, login_user, logout_user
 from app.forms import LoginForm, RegistrationForm, DiaryForm
 from app.models import User, Diary
 from functools import wraps
@@ -11,7 +11,7 @@ def login_required(role="ANY"):
         def decorated_view(*args, **kwargs):
             if not current_user.is_authenticated:
                return redirect(url_for('login'))
-            urole = login.reload_user().get_urole()
+            urole = current_user.get_urole()
             if ( (urole != role) and (role != "ANY")):
                 return login.unauthorized()
             return fn(*args, **kwargs)
@@ -28,7 +28,7 @@ def login():
             return redirect(url_for('indexPatient'))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data)
+        user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash("The username or password is not correct")
             return redirect(url_for('indexPatient'))
@@ -51,10 +51,16 @@ def registration():
             return redirect(url_for('indexPsychiatrist'))
         else:
             return redirect(url_for('indexPatient'))
-        form = RegistrationForm()
-        if form.validate_on_submit():
-            user = User(username=form.username.data)
-            user.set_password(form.password.data)
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)
+        user.is_psychiatrist = form.is_psychiatrist.data
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Your account has been registered!')
+        return redirect(url_for('login'))
+    return render_template('registration.html', title='Register', form=form)       
 
 @app.route('/addPost')
 @login_required(role="Patient")

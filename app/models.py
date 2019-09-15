@@ -10,7 +10,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     is_psychiatrist = db.Column(db.Boolean)
     psychiatrist_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    patients_id = db.relationship('User', backref='psychiatrist', lazy='dynamic')
+    patients_id = db.relationship('User', remote_side=[id])
     diary = db.relationship('Diary', backref='patient', lazy='dynamic')
 
     def __repr__(self):
@@ -23,7 +23,7 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def get_urole(self):
-        if is_psychiatrist:
+        if self.is_psychiatrist:
             return 'Psychiatrist'
         else:
             return 'Patient'
