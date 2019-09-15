@@ -93,11 +93,24 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route('/addPost')
+@app.route('/addPost', methods=["GET","POST"])
 @login_required(role="Patient")
 def addPost():
     form = DiaryForm()
+    print(form.validate_on_submit())
     if form.validate_on_submit():
-        new_post = Diary(date=form.date.data, mood=form.mood.data, post=form.post.data)
+        print("sup")
+        new_post = Diary(date=form.date.data, mood=form.mood.data, post=form.post.data, patient_id=current_user.id)
         current_user.diary.append(new_post)
+        db.session.add(new_post)
+        db.session.commit()
         return redirect(url_for('indexPatient'))
+    return render_template('addPost.html', title='Add Post', form=form)
+
+@app.route('/deletePost/<post_id>')
+@login_required(role="Patient")
+def deletePost(post_id):
+    post = Diary.query.filter_by(id=post_id).first_or_404()
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('indexPatient'))
