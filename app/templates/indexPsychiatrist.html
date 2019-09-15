@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>Home | {{psychiatrist.username}}</div>
+<hr class="header-line">
+    <div><a href="{{url_for('psychiatristManage')}}">Add/Remove Patients</a></div>
+
+    <div>
+        <ul class="patient-list-header">
+            {% for patient in psychiatrist.patients.all() %}
+            <li class="patient-wrap">
+                <div class="patient-header">Log for {{patient.username}}:</div>
+                {% for post in patient.diary %}
+                    <p>Date: {{post.date}}</p>
+                    <p>Mood: {{post.mood}}</p>
+                    <p>Note: {{post.post}}</p>
+                {% endfor %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

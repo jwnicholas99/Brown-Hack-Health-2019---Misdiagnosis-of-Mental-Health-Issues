@@ -33,3 +33,6 @@ class DiaryForm(FlaskForm):
     post = TextAreaField('How was your day?', validators=[DataRequired()])
     submit = SubmitField('Add Post')
 
+class AddPatientForm(FlaskForm):
+    username = StringField('Username for Patient', Validators=[DataRequired()])
+    submit = SubmitField('Add User')
